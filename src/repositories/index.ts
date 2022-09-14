@@ -1,11 +1,19 @@
 import {Project} from '../models';
 
-export const createProject = async <IProject> ( project : IProject) => {
+export const saveProject = async <IProject> ( project : IProject) => {
     const newProject = new Project(project);
     return await newProject.save();
 
 }
 
-export const listProjects = async () => {
+export const findProjects = async () => {
     return await Project.find();
+}
+
+export const deleteOneProject = async (title: String) => {
+    return await Project.deleteOne(
+        {
+            title: title
+        }
+    )
 }
