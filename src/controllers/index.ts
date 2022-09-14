@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { saveProject, findProjects, deleteOneProject } from "../repositories";
+import { saveProject, findProjects, deleteOneProject, updateOneProject } from "../repositories";
 
 export const insertProject = async (req: Request, res: Response) => {
 
@@ -48,5 +48,18 @@ export const deleteProject = async (req: Request, res: Response) => {
 
     } catch (error) {
         return res.status(500).json({msg: 'Ocorreu um erro ao tentar excluir um projeto', error})        
+    }
+}
+
+export const updateProject = async (req: Request, res: Response) => {
+    const {title} = req.params;
+    const {completed} = req.body;
+
+    try {
+        const updatedProject = await updateOneProject(title, completed)
+        return res.status(200).json({msg: "Projeto atualizado com sucesso", updatedProject});
+        
+    } catch (error) {
+        return res.status(500).json({msg: 'Ocorreu um erro ao tentar atualizar o projeto', error})    
     }
 }

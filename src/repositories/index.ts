@@ -17,3 +17,15 @@ export const deleteOneProject = async (title: String) => {
         }
     )
 }
+
+export const updateOneProject = async  <IProject> ( title : String, completed: Boolean) => {
+
+    return await Project.updateOne(
+        {
+            title: title
+        },
+        {
+            completed: completed
+        }
+    );
+}
